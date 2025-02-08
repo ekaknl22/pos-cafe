@@ -1,0 +1,190 @@
+<?php
+session_start();
+//Cek apakah pengguna sudah login dan adalah admin
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+
+// Koneksi ke database
+include_once 'koneksi.php';
+
+$default_view = 'tampil_semua.php';
+
+if (isset($_GET['view'])) {
+    $view = $_GET['view'];
+    
+    // Pengondisian untuk menu
+    switch ($view) {
+        case 'all':
+            $view = 'tampil_semua.php'; // Halaman untuk semua
+            break;
+        case 'beverage':
+            $view = 'tampil_minuman.php'; // Halaman untuk minuman
+            break;
+        case 'food':
+            $view = 'tampil_makanan.php'; // Halaman untuk makanan
+            break;
+        default:
+            $view = $default_view; // Gunakan tampilan default jika tidak ada yang cocok
+            break;
+    }
+} else {
+    $view = $default_view; // Gunakan tampilan default
+}
+// Cek apakah ada pesan dalam session
+if (isset($_SESSION['message'])) {
+    echo "<script>alert('" . $_SESSION['message'] . "');</script>";
+    unset($_SESSION['message']);
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Point of Sales</title>
+    <link rel="stylesheet" href="Assets/css/style.css">
+    <link rel="stylesheet" href="Assets/css/order_summary.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body class="all">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-fluid navbar-dark bg-dark fixed-top">
+        <div class="container-fluid d-flex align-items-center">
+            <a class="navbar-brand dynapuff-unique" style="font-size:2rem" href="#"><img class="img-logo" src="Assets/logocute.jpg" alt="logo Bake&Brew">Bake&Brew</a>
+            <div id="date-time" class="text-white">
+                <input type="hidden" id="order_date" name="order_date">
+            </div>
+            <button class="navbar-toggler shadow-none border-0 me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Sidebar -->
+            <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="sidebar offcanvas-header text-white border-bottom">
+                    <h5 class="offcanvas-title dynapuff-unique" id="offcanvasNavbarLabel"><img src="Assets/logocute.jpg" class="img-logo ">Bake&Brew</h5>
+                    <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <div class="sidebar offcanvas-body d-flex flex-column p-4">
+                    <ul class="navbar-nav justify-content-start flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#" onclick="setActive(this)">Point Of Sales</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button" aria-expanded="false" onclick="setActive(this)">Inventory</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="tambah_menu.php">Add Menu</a></li>
+                                <li><a class="dropdown-item" href="tampil_menu.php">Edit Menu</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" onclick="setActive(this)" href="report.php">Report</a>
+                        </li>
+                    </ul>
+
+                    <!-- Logout -->
+                    <div>
+                        <a href="logout.php" class="btn-logout text-decoration-none">Log out <img src="Assets/logout.svg"></a>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </nav>
+
+    <!-- Main -->
+    <main>
+        <div class="d-flex justify-content-between">
+            <!-- Menu -->
+            <div class="d-flex flex-column me-3 menu-container">
+                <div class="d-flex justify-content-start mb-3">
+                    <button class="btn-menu">
+                        <a href="?view=all" class="active text-decoration-none text-dark"><img class="img-menu" src="Assets/food.png">All Menu</a>
+                    </button>
+                    <button class="btn-menu"><a href="?view=beverage" class="text-dark text-decoration-none"><img class="img-menu" src="Assets/coffee.png">Beverage</a></button>
+                    <button class="btn-menu">
+                        <a href="?view=food" class="text-decoration-none text-dark"><img class="img-menu" src="Assets/croissant.png">Food</a>
+                    </button>
+                </div>
+                <div class="scroll-content order-items">
+                <?php include_once $view ?>
+                </div>
+                
+            </div>
+    <form action="simpan_order.php" method="POST">
+    <h3>Order Summary</h3>
+    <input type="hidden" id="order_number" name="order_number" value="">
+        <label for="nama_customer">Nama Customer:</label><br>
+        <input type="text" id="nama_customer" name="nama_customer" required><br><br>
+
+        <label for="order_type">Order Type:</label><br>
+        <select id="order_type" name="order_type" required>
+            <option value="dine in">Dine In</option>
+            <option value="take away">Take Away</option>
+            <option value="delivery">Delivery</option>
+        </select><br><br>
+        <div class="tempat-order" id="order-items" style="border-top: 1px solid #ccc; flex-grow: 1; margin-bottom: 20px; border-bottom: 1px solid #ccc; padding: 10px;">
+        <p class="text-center">---No item selected---</p>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <p>Subtotal</p>
+          <p id="subtotal">Rp 0</p>
+          <input type="hidden" id="subtotal_hidden" name="subtotal">
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <p>Tax 10%</p>
+          <p id="tax">Rp 0</p>
+          <input type="hidden" id="tax_hidden" name="tax">
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <p>Total</p>
+          <p id="total">Rp 0</p>
+        <input type="hidden" id="total_hidden" name="total">        
+        </div>
+
+        <input type="hidden" id="order_date" name="order_date">
+        
+        <input type="submit" id="submit-button" value="Simpan Order">
+        <input type="button" id="cancel-button" value="Cancel Order" onclick="location.href='index.html'">
+    </form>
+
+</div>
+
+</div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7Ms ```html
+XsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="Assets/js/submit_order.js"></script>
+
+    
+    <script>
+        let today = new Date();
+        let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        let formattedDate = today.toLocaleDateString('id-ID', options);
+
+        document.getElementById("date-time").innerHTML = formattedDate;
+
+        // Mengubah format tanggal ke DD-MM-YYYY
+        let day = String(today.getDate()).padStart(2, '0'); // Mengambil hari dan menambahkan nol di depan jika perlu
+        let month = String(today.getMonth() + 1).padStart(2, '0'); // Mengambil bulan (0-11) dan menambahkan nol di depan
+        let year = today.getFullYear(); // Mengambil tahun
+
+        // Menggabungkan menjadi format DD-MM-YYYY
+        let formattedOrderDate = `${day}-${month}-${year}`;
+    
+        function setActive(element) {
+            // Menghapus kelas 'active' dari semua link
+            var links = document.querySelectorAll('.nav-link');
+            links.forEach(function(link) {
+                link.classList.remove('active');
+            });
+            
+            // Menambahkan kelas 'active' pada link yang diklik
+            element.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>

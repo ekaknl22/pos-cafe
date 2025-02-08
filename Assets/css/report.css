@@ -1,0 +1,93 @@
+.card-container {
+  position: absolute;
+  display: flex;
+  gap: 20px;
+  left: 20px;
+  top: 100px;
+}
+  .card {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 16px;
+      width: 300px;
+      max-height: 115px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .card.riwayat{
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card.riwayat:hover {
+    transform: scale(1.02); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    cursor: pointer; 
+}
+  .card-body {
+    justify-content: center;
+      text-align: center;
+  }
+  .card-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 8px;
+  }
+  .card-text {
+      font-size: 14px;
+      color: #666;
+  }
+  #myChart{
+    margin-top: 200px;
+    margin-left: 20px;
+  }
+.btn-kembali{
+  margin-top: 100px;
+  margin-left: 20px;
+}
+  h2.text-center {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+  }
+.table-container {
+  position: relative;
+  width: 100%; 
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.table {
+    width: 100%; 
+    
+}
+.btn-delete {
+  text-decoration: none;
+  background-color: red; 
+  color: white;
+  border: none; 
+  border-radius: 10px;
+  padding: 7px 10px; 
+  cursor: pointer; 
+}
+.btn-delete:hover {
+  color: white;
+  background-color: darkred;
+}
+.btn-cetak {
+  margin-bottom: 20px;
+  display: block;
+  text-align: center;
+}
+.cetak{
+  padding: 10px 15px;
+  border-radius: 10px;
+  background-color: green;
+  color: #ffffff;
+  text-decoration: none;
+}
+.cetak:hover{
+  color: #ffffff;
+  font-weight: bold;
+  background-color: green;
+  
+}
+
+  

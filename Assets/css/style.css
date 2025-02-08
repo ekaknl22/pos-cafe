@@ -1,0 +1,317 @@
+body{
+  height: 100%;
+}
+main{
+  padding-top: 65px;
+  display: flex;
+  height: 100vh;
+}
+.all{
+  background-color: #f7f7f7;
+  font-family: 'Quicsand', sans-serif;
+  font-size: 1rem;
+}
+@media (max-width: 1320px) {
+  .sidebar{
+    background-color: #1A1A1D;
+    backdrop-filter: blur(10px);
+  }
+}
+navbar{
+  margin: 0;
+}
+.navbar-toggler{
+  margin-right: 0.5rem;
+}
+/* Gaya untuk dropdown menu */
+.nav-item.dropdown .dropdown-menu {
+  border-radius: 8px; /* Sudut melengkung */
+  background-color: #1A1A1D; /* Warna latar belakang */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan */
+  padding: 10px 0; /* Padding atas dan bawah */
+}
+
+/* Gaya untuk item dalam dropdown */
+.dropdown-item {
+  color: #ffffff !important; /* Warna teks */
+  padding: 10px 20px; /* Padding item */
+  transition: background-color 0.3s; /* Transisi saat hover */
+}
+
+/* Gaya saat hover pada item dropdown */
+.dropdown-item:hover {
+  background-color: #27272b !important; /* Warna latar belakang saat hover */
+  font-weight: bold; /* Warna teks saat hover */
+}
+
+/* Gaya untuk link dropdown toggle */
+.nav-link.dropdown-toggle {
+  color: #007bff; /* Warna teks link */
+}
+
+/* Gaya saat dropdown terbuka */
+.nav-item.dropdown.show .dropdown-menu {
+  display: block; /* Pastikan dropdown terlihat ketika aktif */
+}
+
+.nav-link{
+  display: inline-flex;
+  justify-content: center;
+  color: white;
+  background-color: #1A1A1D;
+  padding: 10px e20px;
+  border-radius: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  width: 200px;
+  transition: #1A1A1D 0.2s ease-in-out;
+}
+.nav-link.active{
+  display: inline-flex;
+  justify-content: center;
+  background-color: #F4CE14;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  width: 200px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+.btn-logout {
+  display: inline-flex; /* Gunakan flexbox untuk tata letak horizontal */
+  align-items: center; /* Vertikal rata tengah */
+  justify-content: space-between; /* Jarak maksimum antara teks dan gambar */
+  width: 200px; /* Lebar tombol */
+  padding: 10px 20px; /* Ruang dalam tombol */
+  background-color: transparent; /* Warna latar */
+  color: #e32416; /* Warna teks */
+  border: 2px solid #e32416 ; /* Hapus border default */
+  border-radius: 20px; /* Buat sudut membulat */
+  text-align: center; /* Pusatkan teks */
+  cursor: pointer; /* Ubah kursor menjadi pointer */
+  text-decoration: none; /* Hapus garis bawah */
+}
+
+.btn-logout img {
+  margin-left: 10px; /* Jarak antara teks dan gambar */
+  width: 25px; /* Ukuran ikon */
+}
+
+.btn-logout:hover{
+  background-color: #e32416;
+  color: white;
+  border-radius: 20px;
+}
+
+.btn-menu {
+  background-color: #fffdf5; /* Ganti dengan warna yang diinginkan */
+  height: 100px; 
+  width: 100px;
+  display: flex; 
+  align-items: flex-end; /* Vertikal center */
+  justify-content: center; /* Horizontal center */
+  text-align: center; /* Mengatur teks agar berada di tengah */
+  margin-right: 10px; /* Jarak antar tombol */
+  position: relative;
+  left: 20px;
+  top: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Menambahkan box-shadow */
+  border-radius: 10px; /* Sudut membulat */
+  transition: box-shadow 0.3s ease;
+  
+}
+.img-menu{
+  position: absolute;
+  align-content: center;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  width: 50px;
+  top: 5px;
+  left: 50%; /* Posisikan elemen di tengah secara horizontal */
+  transform: translateX(-50%);
+}
+.img-logo{
+  width: 60px;
+  border-radius: 50px;
+  margin-right: 10px;
+}
+.dynapuff-unique {
+  font-family: "DynaPuff", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:"wdth" 0;
+  font-size: 2rem;
+}
+.btn-search{
+  background-color: #F4CE14;
+  border: none;
+  color: white;
+  border-radius: 10px;
+}
+.btn-search:hover{
+  background-color: #F4CE14;
+  font-weight: bold;
+}
+
+input{
+  border-radius: 10px;
+  border: 1px solid #1A1A1D;
+}
+.custom-btndd{
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: none;
+  background-color: #F4CE14;
+}
+.btn-placeOrder{
+  background-color: #379777;
+  border-radius: 20px;
+  border: none;
+  width: 100%;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.btn-placeOrder:hover{
+  background-color: #495E57;
+}
+.custom-btnLogin{
+  background-color: #F4CE14;
+  border-radius: 10px;
+  border: none;
+  padding: 10px 20px;
+}
+.custom-btnCancel{
+  border: 1px solid #F4CE14;
+  background-color: #fffdf5;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+.body-login{
+  background-color: #1A1A1D;
+}
+.menu-container{
+  flex: 1;
+}
+.order-summary{
+  margin-right: 10px;
+  margin-left: 5px;
+  margin-top: 5px;
+  width: 100%;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+.more-text{
+  display: none;
+}
+.harga{
+  color: #e32416;
+  font-size: 10px;
+}
+.card{
+  height: 100%;
+}
+.card-img-top{
+  object-fit: cover;
+  height: 150px;
+}
+.card-text {
+    margin-bottom: 0.3rem;
+}
+.kategori-minuman{
+  color: blue;
+  font-size: 12px;
+}
+.kategori-makanan{
+  color: green;
+  font-size: 12px;
+}
+.scroll-content {
+  max-height: calc(100vh - 200px); /* Atur tinggi maksimum sesuai kebutuhan */
+  overflow-y: auto;  /* Tambahkan scroll bar vertikal */
+  border: 1px solid #ccc; /* Opsional: Tambahkan border untuk visualisasi */
+  padding: 10px; /* Opsional: Tambahkan padding untuk estetika */
+  background-color: #fff; /* Opsional: Atur latar belakang */
+}
+.btn-container{
+  display: flex;
+  gap: 10px;
+}
+
+
+/* DESAIN FILE EDIT_MENU.PHP */
+body{
+  background-color: #1A1A1D;
+}
+#editmenu-header{
+  text-align: center;
+  margin: 20px 0;
+  color: white;
+}
+
+#form-edit{
+  background-color: #333;
+  width: 400px;
+  height: auto;
+  padding: 20px;
+  color: white;
+  border-radius: 10px;
+  margin: 20px auto;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#form-edit label{
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+#form-edit input[type="text"],
+#form-edit textarea{
+  width: 100%;
+  padding: 4px;
+  border: 1px solid #ff9800;
+}
+
+#form-edit textarea {
+  resize: none;
+  height: 70px;
+}
+
+#form-edit input[type="file"] {
+  width: auto; /* Gunakan ukuran otomatis sesuai konten */
+  padding: 5px; /* Tambahkan sedikit padding agar lebih rapi */
+  margin-bottom: 15px;
+  border: none; /* Hilangkan border default */
+  font-size: 14px;
+}
+
+#form-edit input[type="submit"] {
+  background-color: #F4CE14;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+}
+
+#form-edit a{
+  text-decoration: none;
+  color: #f2f2f2;
+  text-align: center;
+  display: block;
+  margin-top: 10px;
+}
+
+#form-edit a:hover{
+  color: #ddd;
+  text-decoration: underline;
+}
